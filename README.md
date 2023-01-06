@@ -25,8 +25,8 @@ bin/cake upgrade files /path/to/repo -v -d
 Keep verbose and dry-run for checking if it works as expected, then apply your changes for real.
 
 This tool works best in combination with the official [upgrade](https://github.com/cakephp/upgrade/) tool and its rector based approaches.
-- dereuromark/upgrade handles basic cases and non-PHP files
-- cakephp/upgrade handles PHP class files via rector (requires valid PHP files)
+- `dereuromark/upgrade` handles basic cases and non-PHP files as well as some PHP topics
+- `cakephp/upgrade` handles PHP class files via rector (requires valid PHP files), but can fix more complex PHP cases
 
 If rector fails or cannot handle your app, you can try to use this tool completely by defining more regex
 based rules for example.
@@ -81,5 +81,17 @@ bin/cake upgrade rector /home/mark/Sites/my-app/tests
 bin/cake upgrade rector /home/mark/Sites/my-app/config
 ```
 
+### File rename command
+```bash
+# Rename locale files
+bin/cake upgrade file_rename locales /home/mark/Sites/my-app
+
+# Rename template files
+bin/cake upgrade file_rename templates /home/mark/Sites/my-app
+```
+
+### Upgrade files
+See above `bin/cake upgrade files` docs.
+
 ### Upgrade legacy shell
-See cake4 branch.
+See cake4 branch etc.
