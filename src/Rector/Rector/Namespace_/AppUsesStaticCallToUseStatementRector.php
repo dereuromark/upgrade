@@ -115,7 +115,10 @@ CODE_SAMPLE
     }
 
     /**
-     * @param \PhpParser\Node\Stmt\Use_[] $fileWithoutNamespace
+     * @param \Rector\Core\PhpParser\Node\CustomNode\FileWithoutNamespace $fileWithoutNamespace
+     * @param array $uses
+     *
+     * @return \Rector\Core\PhpParser\Node\CustomNode\FileWithoutNamespace|null
      */
     private function refactorFile(FileWithoutNamespace $fileWithoutNamespace, array $uses): ?FileWithoutNamespace
     {
@@ -150,7 +153,10 @@ CODE_SAMPLE
     }
 
     /**
-     * @param \PhpParser\Node\Stmt\Use_[] $fileWithoutNamespace
+     * @param \Rector\Core\PhpParser\Node\CustomNode\FileWithoutNamespace $fileWithoutNamespace
+     * @param array $uses
+     *
+     * @return \Rector\Core\PhpParser\Node\CustomNode\FileWithoutNamespace
      */
     private function refactorFileWithDeclare(
         FileWithoutNamespace $fileWithoutNamespace,
