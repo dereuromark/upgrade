@@ -11,9 +11,9 @@ use Cake\Upgrade\Task\Task;
  */
 class ComposerPsr2rTask extends Task implements RepoTaskInterface
 {
- /**
-  * @var string
-  */
+    /**
+     * @var string
+     */
     protected const TARGET_VERSION = 'dev-next';
 
     /**

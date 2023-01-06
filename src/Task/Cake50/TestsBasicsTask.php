@@ -11,11 +11,11 @@ use Cake\Upgrade\Task\Task;
  */
 class TestsBasicsTask extends Task implements FileTaskInterface
 {
- /**
-  * @param string $path
-  *
-  * @return array<string>
-  */
+    /**
+     * @param string $path
+     *
+     * @return array<string>
+     */
     public function getFiles(string $path): array
     {
         return $this->collectFiles($path, 'php', ['tests/TestCase/Controller/']);

@@ -20,11 +20,11 @@ use Cake\Upgrade\Command\UpgradeCommand;
  */
 class Application implements ConsoleApplicationInterface
 {
- /**
-  * Load configuration data.
-  *
-  * @return void
-  */
+    /**
+     * Load configuration data.
+     *
+     * @return void
+     */
     public function bootstrap(): void
     {
         require_once dirname(__DIR__) . '/config/bootstrap.php';

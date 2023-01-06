@@ -11,11 +11,11 @@ use Cake\Upgrade\Task\Task;
  */
 class TypedPropertyTask extends Task implements FileTaskInterface
 {
- /**
-  * @param string $path
-  *
-  * @return array<string>
-  */
+    /**
+     * @param string $path
+     *
+     * @return array<string>
+     */
     public function getFiles(string $path): array
     {
         return $this->collectFiles($path, 'php', ['src/', 'tests/TestCase/', 'tests/test_app/', 'tests/test_app/plugins/']);

@@ -6,17 +6,17 @@ use SebastianBergmann\Diff\Differ as SebastianBergmannDiffer;
 
 class Differ
 {
- /**
-  * Aware of context (CLI vs Web)
-  *
-  * Note: HTML is auto-escaping all values for colors
-  * For non coloring make sure to manually escape.
-  *
-  * @param string $before
-  * @param string $after
-  *
-  * @return string
-  */
+    /**
+     * Aware of context (CLI vs Web)
+     *
+     * Note: HTML is auto-escaping all values for colors
+     * For non coloring make sure to manually escape.
+     *
+     * @param string $before
+     * @param string $after
+     *
+     * @return string
+     */
     public function coloredDiff(string $before, string $after): string
     {
         $differ = new SebastianBergmannDiffer();

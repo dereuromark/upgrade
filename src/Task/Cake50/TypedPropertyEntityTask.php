@@ -11,11 +11,11 @@ use Cake\Upgrade\Task\Task;
  */
 class TypedPropertyEntityTask extends Task implements FileTaskInterface
 {
- /**
-  * @param string $path
-  *
-  * @return array<string>
-  */
+    /**
+     * @param string $path
+     *
+     * @return array<string>
+     */
     public function getFiles(string $path): array
     {
         return $this->collectFiles($path, 'php', ['src/Model/Entity/', 'tests/test_app/src/Model/Entity/']);

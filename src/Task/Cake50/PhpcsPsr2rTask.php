@@ -14,11 +14,11 @@ use Cake\Upgrade\Task\Task;
  */
 class PhpcsPsr2rTask extends Task implements RepoTaskInterface
 {
- /**
-  * @param string $path
-  *
-  * @return void
-  */
+    /**
+     * @param string $path
+     *
+     * @return void
+     */
     public function run(string $path): void
     {
         $filePath = $path . 'phpcs.xml';

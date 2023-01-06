@@ -7,9 +7,9 @@ use Cake\Upgrade\Task\FileTaskInterface;
 
 class Processor
 {
- /**
-  * @var array<class-string<\Cake\Upgrade\Task\TaskInterface>>
-  */
+    /**
+     * @var array<class-string<\Cake\Upgrade\Task\TaskInterface>>
+     */
     protected array $tasks;
 
     /**

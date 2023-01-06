@@ -23,11 +23,11 @@ use RuntimeException;
  */
 class FileRenameCommand extends BaseCommand
 {
- /**
-  * Is git used
-  *
-  * @var bool
-  */
+    /**
+     * Is git used
+     *
+     * @var bool
+     */
     protected $git = false;
 
     /**

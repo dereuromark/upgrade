@@ -6,9 +6,9 @@ use RuntimeException;
 
 class ComposerJson
 {
- /**
-  * @var array<string>
-  */
+    /**
+     * @var array<string>
+     */
     protected static $objectKeys = [
         'autoload',
         'autoload-dev',

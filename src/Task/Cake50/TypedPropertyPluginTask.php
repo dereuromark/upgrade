@@ -11,9 +11,9 @@ use Cake\Upgrade\Task\Task;
  */
 class TypedPropertyPluginTask extends Task implements RepoTaskInterface
 {
- /**
-  * @var array<string>
-  */
+    /**
+     * @var array<string>
+     */
     protected const PROPERTIES = [
         'bootstrapEnabled',
         'consoleEnabled',

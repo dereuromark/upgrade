@@ -11,11 +11,11 @@ use Cake\Upgrade\Task\Task;
  */
 class TestsBootstrapFixtureTask extends Task implements RepoTaskInterface
 {
- /**
-  * @param string $path
-  *
-  * @return void
-  */
+    /**
+     * @param string $path
+     *
+     * @return void
+     */
     public function run(string $path): void
     {
         $filePath = $path . 'tests/bootstrap.php';

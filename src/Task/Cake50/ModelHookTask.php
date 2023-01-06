@@ -11,11 +11,11 @@ use Cake\Upgrade\Task\Task;
  */
 class ModelHookTask extends Task implements FileTaskInterface
 {
- /**
-  * @param string $path
-  *
-  * @return array<string>
-  */
+    /**
+     * @param string $path
+     *
+     * @return array<string>
+     */
     public function getFiles(string $path): array
     {
         return $this->collectFiles($path, 'php', ['src/Model/', 'tests/TestCase/Model/']);

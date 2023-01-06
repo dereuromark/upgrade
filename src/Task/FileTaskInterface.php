@@ -7,10 +7,10 @@ namespace Cake\Upgrade\Task;
  */
 interface FileTaskInterface extends TaskInterface
 {
- /**
-  * @param string $path
-  *
-  * @return array<string>
-  */
+    /**
+     * @param string $path
+     *
+     * @return array<string>
+     */
     public function getFiles(string $path): array;
 }

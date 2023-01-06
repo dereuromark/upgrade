@@ -12,11 +12,11 @@ use Cake\Upgrade\Task\Task;
  */
 class ReadmeTask extends Task implements RepoTaskInterface
 {
- /**
-  * Default value (min) if no other **higher** value is set within composer.json
-  *
-  * @var string
-  */
+    /**
+     * Default value (min) if no other **higher** value is set within composer.json
+     *
+     * @var string
+     */
     protected const TARGET_VERSION_PHP = '8.1';
 
     /**

@@ -4,11 +4,11 @@ namespace Cake\Upgrade\Task;
 
 interface TaskInterface
 {
- /**
-  * @param string $path
-  *
-  * @return void
-  */
+    /**
+     * @param string $path
+     *
+     * @return void
+     */
     public function run(string $path): void;
 
     /**

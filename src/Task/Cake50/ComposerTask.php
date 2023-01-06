@@ -14,9 +14,9 @@ use Cake\Upgrade\Utility\ComposerJson;
  */
 class ComposerTask extends Task implements RepoTaskInterface
 {
- /**
-  * @var string
-  */
+    /**
+     * @var string
+     */
     protected const CHAR_PHP = '>=';
 
     /**

@@ -6,9 +6,9 @@ use Countable;
 
 class ChangeSet implements Countable
 {
- /**
-  * @var array<\Cake\Upgrade\Task\Change>
-  */
+    /**
+     * @var array<\Cake\Upgrade\Task\Change>
+     */
     protected array $changes;
 
     /**

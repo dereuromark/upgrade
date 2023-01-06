@@ -12,9 +12,9 @@ use Cake\Upgrade\Utility\ComposerJson;
  */
 class TestsFixtureSchemaTask extends Task implements RepoTaskInterface
 {
- /**
-  * @var string
-  */
+    /**
+     * @var string
+     */
     protected const FILE_SCHEMA = 'tests/schema.php';
 
     /**
