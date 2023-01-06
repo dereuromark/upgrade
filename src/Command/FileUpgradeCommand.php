@@ -37,6 +37,12 @@ use Cake\Upgrade\Task\ChangeSet;
 use DirectoryIterator;
 use InvalidArgumentException;
 
+/**
+ * @author Mark Scherer
+ *
+ * Many fixers are specific to my plugins, but they most likely will not have side effects on other code.
+ * Use Configuration of fixer tasks if needed.
+ */
 class FileUpgradeCommand extends Command
 {
     /**
