@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="friendsofcake-search">
+<ruleset name="upgrade">
 	<config name="installed_paths" value="vendor/spryker/code-sniffer/Spryker"/>
 
 	<arg value="nps"/>
