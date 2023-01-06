@@ -5,5 +5,6 @@ namespace Cake\Upgrade\Task;
 /**
  * Runs per repository.
  */
-interface RepoTaskInterface extends TaskInterface {
+interface RepoTaskInterface extends TaskInterface
+{
 }

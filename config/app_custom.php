@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'debug' => true,
+    'debug' => true,
 
 /**
  * Configure basic information about the application.
@@ -12,11 +12,11 @@ return [
  *   will be auto detected.
  * - dir - Name of app directory.
  */
-	'App' => [
-		'namespace' => 'Cake\Upgrade',
-		'encoding' => 'UTF-8',
-		'base' => false,
-		'dir' => 'src',
-	],
+    'App' => [
+        'namespace' => 'Cake\Upgrade',
+        'encoding' => 'UTF-8',
+        'base' => false,
+        'dir' => 'src',
+    ],
 
 ];

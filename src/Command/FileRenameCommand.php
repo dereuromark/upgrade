@@ -1,19 +1,8 @@
 <?php
+
+
 declare(strict_types=1);
 
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         4.0.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
 namespace Cake\Upgrade\Command;
 
 use Cake\Console\Arguments;
@@ -34,11 +23,11 @@ use RuntimeException;
  */
 class FileRenameCommand extends BaseCommand
 {
-    /**
-     * Is git used
-     *
-     * @var bool
-     */
+ /**
+  * Is git used
+  *
+  * @var bool
+  */
     protected $git = false;
 
     /**
@@ -85,6 +74,7 @@ class FileRenameCommand extends BaseCommand
      *
      * @param \Cake\Console\Arguments $args The command arguments.
      * @param \Cake\Console\ConsoleIo $io The console io
+     *
      * @return int|null
      */
     public function execute(Arguments $args, ConsoleIo $io): ?int
@@ -103,9 +93,11 @@ class FileRenameCommand extends BaseCommand
         switch ($args->getArgument('type')) {
             case 'templates':
                 $this->processTemplates();
+
                 break;
             case 'locales':
                 $this->processLocales();
+
                 break;
         }
 
@@ -123,7 +115,7 @@ class FileRenameCommand extends BaseCommand
         if (is_dir($this->path . 'src/Template')) {
             $this->rename(
                 $this->path . 'src/Template',
-                $this->path . 'templates'
+                $this->path . 'templates',
             );
             $this->renameSubFolders($this->path . 'templates');
             $this->changeExt($this->path . 'templates');
@@ -140,7 +132,7 @@ class FileRenameCommand extends BaseCommand
 
                 $this->rename(
                     $dirPath . '/src/Template',
-                    $dirPath . '/templates'
+                    $dirPath . '/templates',
                 );
                 $this->renameSubFolders($dirPath . '/templates');
                 $this->changeExt($dirPath . '/templates');
@@ -159,7 +151,7 @@ class FileRenameCommand extends BaseCommand
         if (is_dir($this->path . 'src/Locale')) {
             $this->rename(
                 $this->path . 'src/Locale',
-                $this->path . 'resources/locales'
+                $this->path . 'resources/locales',
             );
         }
 
@@ -174,7 +166,7 @@ class FileRenameCommand extends BaseCommand
 
                 $this->rename(
                     $dirPath . '/src/Locale',
-                    $dirPath . '/resources/locales'
+                    $dirPath . '/resources/locales',
                 );
             }
         }
@@ -185,6 +177,7 @@ class FileRenameCommand extends BaseCommand
      * respectively.
      *
      * @param string $path Path.
+     *
      * @return void
      */
     protected function renameSubFolders(string $path): void
@@ -199,19 +192,19 @@ class FileRenameCommand extends BaseCommand
         foreach ($folders as $folder) {
             $dirIter = new RecursiveDirectoryIterator(
                 $path,
-                RecursiveDirectoryIterator::UNIX_PATHS
+                RecursiveDirectoryIterator::UNIX_PATHS,
             );
             $iterIter = new RecursiveIteratorIterator($dirIter);
             $templateDirs = new RegexIterator(
                 $iterIter,
                 '#/' . $folder . '/\.$#',
-                RecursiveRegexIterator::SPLIT
+                RecursiveRegexIterator::SPLIT,
             );
 
             foreach ($templateDirs as $val) {
                 $this->renameWithCasing(
                     $val[0] . '/' . $folder,
-                    $val[0] . '/' . strtolower($folder)
+                    $val[0] . '/' . strtolower($folder),
                 );
             }
         }
@@ -221,6 +214,7 @@ class FileRenameCommand extends BaseCommand
      * Recursively change template extension to .php
      *
      * @param string $path Path
+     *
      * @return void
      */
     protected function changeExt(string $path): void
@@ -231,13 +225,13 @@ class FileRenameCommand extends BaseCommand
         }
         $dirIter = new RecursiveDirectoryIterator(
             $path,
-            RecursiveDirectoryIterator::SKIP_DOTS | RecursiveDirectoryIterator::UNIX_PATHS
+            RecursiveDirectoryIterator::SKIP_DOTS | RecursiveDirectoryIterator::UNIX_PATHS,
         );
         $iterIter = new RecursiveIteratorIterator($dirIter);
         $templates = new RegexIterator(
             $iterIter,
             '/\.ctp$/i',
-            RecursiveRegexIterator::REPLACE
+            RecursiveRegexIterator::REPLACE,
         );
 
         foreach ($templates as $val) {
@@ -250,6 +244,9 @@ class FileRenameCommand extends BaseCommand
      *
      * @param string $source Source path.
      * @param string $dest Destination path.
+     *
+     * @throws \RuntimeException
+     *
      * @return void
      */
     protected function renameWithCasing(string $source, string $dest): void
@@ -278,7 +275,7 @@ class FileRenameCommand extends BaseCommand
                     'Unable to move: %s to : %s - Reason: %s - Hint: Maybe you have uncommited changes in git.',
                     $source,
                     $tempDest,
-                    $lastLine
+                    $lastLine,
                 ));
             }
             $gitOutput = [];
@@ -289,7 +286,7 @@ class FileRenameCommand extends BaseCommand
                     'Unable to move: %s to : %s - Reason: %s - Hint: Maybe you have uncommited changes in git.',
                     $tempDest,
                     $dest,
-                    $lastLine
+                    $lastLine,
                 ));
             }
             chdir($restore);
@@ -304,8 +301,10 @@ class FileRenameCommand extends BaseCommand
      *
      * @param string $source Source path.
      * @param string $dest Destination path.
-     * @return void
+     *
      * @throws \Cake\Error\FatalErrorException When we're unable to move the folder via git.
+     *
+     * @return void
      */
     protected function rename(string $source, string $dest): void
     {
@@ -332,7 +331,7 @@ class FileRenameCommand extends BaseCommand
                     'Unable to move: %s to : %s - Reason: %s - Hint: Maybe you have uncommited changes in git.',
                     $source,
                     $dest,
-                    $lastLine
+                    $lastLine,
                 ));
             }
 
@@ -346,6 +345,7 @@ class FileRenameCommand extends BaseCommand
      * Gets the option parser instance and configures it.
      *
      * @param \Cake\Console\ConsoleOptionParser $parser The parser to build
+     *
      * @return \Cake\Console\ConsoleOptionParser
      */
     protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser

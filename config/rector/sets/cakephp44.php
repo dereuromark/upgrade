@@ -19,6 +19,6 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->ruleWithConfiguration(
         RenameMethodRector::class,
-        [new MethodCallRename('Cake\Database\Query', 'newExpr', 'expr')]
+        [new MethodCallRename('Cake\Database\Query', 'newExpr', 'expr')],
     );
 };

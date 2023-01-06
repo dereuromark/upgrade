@@ -9,25 +9,25 @@ use Cake\Upgrade\Task\Task;
  * Adjusts:
  * - composer constraint for new next branch
  */
-class ComposerPsr2rTask extends Task implements RepoTaskInterface {
+class ComposerPsr2rTask extends Task implements RepoTaskInterface
+{
+ /**
+  * @var string
+  */
+    protected const TARGET_VERSION = 'dev-next';
 
-	/**
-	 * @var string
-	 */
-	protected const TARGET_VERSION = 'dev-next';
+    /**
+     * @param string $path
+     *
+     * @return void
+     */
+    public function run(string $path): void
+    {
+        $filePath = $path . 'composer.json';
+        $content = (string)file_get_contents($filePath);
 
-	/**
-	 * @param string $path
-	 *
-	 * @return void
-	 */
-	public function run(string $path): void {
-		$filePath = $path . 'composer.json';
-		$content = (string)file_get_contents($filePath);
+        $newContent = str_replace('"fig-r/psr2r-sniffer": "dev-master"', '"fig-r/psr2r-sniffer": "' . static::TARGET_VERSION . '"', $content);
 
-		$newContent = str_replace('"fig-r/psr2r-sniffer": "dev-master"', '"fig-r/psr2r-sniffer": "' . static::TARGET_VERSION . '"', $content);
-
-		$this->persistFile($filePath, $content, $newContent);
-	}
-
+        $this->persistFile($filePath, $content, $newContent);
+    }
 }

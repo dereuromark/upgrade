@@ -1,19 +1,8 @@
 <?php
+
+
 declare(strict_types=1);
 
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         4.0.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
 namespace Cake\Upgrade\Command;
 
 use Cake\Console\Arguments;
@@ -26,13 +15,14 @@ use Cake\Console\ConsoleOptionParser;
  */
 class RectorCommand extends BaseCommand
 {
-    /**
-     * Execute.
-     *
-     * @param \Cake\Console\Arguments $args The command arguments.
-     * @param \Cake\Console\ConsoleIo $io The console io
-     * @return int|null
-     */
+ /**
+  * Execute.
+  *
+  * @param \Cake\Console\Arguments $args The command arguments.
+  * @param \Cake\Console\ConsoleIo $io The console io
+  *
+  * @return int|null
+  */
     public function execute(Arguments $args, ConsoleIo $io): ?int
     {
         $path = (string)$args->getArgument('path');
@@ -43,7 +33,7 @@ class RectorCommand extends BaseCommand
         }
 
         $autoload = $args->getOption('autoload');
-        if (empty($autoload)) {
+        if (!$autoload) {
             $autoload = $this->detectAutoload($io, $path);
         }
         if ($autoload === null) {
@@ -74,6 +64,7 @@ class RectorCommand extends BaseCommand
      * @param \Cake\Console\ConsoleIo $io The io object to output with
      * @param \Cake\Console\Arguments $args The Arguments object
      * @param string $autoload The autoload file path.
+     *
      * @return bool
      */
     protected function runRector(ConsoleIo $io, Arguments $args, string $autoload): bool
@@ -88,7 +79,7 @@ class RectorCommand extends BaseCommand
             $args->getOption('dry-run') ? '--dry-run' : '',
             escapeshellarg($autoload),
             escapeshellarg($config),
-            escapeshellarg($path)
+            escapeshellarg($path),
         );
         $io->verbose("Running <info>{$command}</info>");
 
@@ -100,7 +91,7 @@ class RectorCommand extends BaseCommand
         $process = proc_open(
             $command,
             $descriptorSpec,
-            $pipes
+            $pipes,
         );
         if (!is_resource($process)) {
             $io->error('Could not create rector process');
@@ -135,6 +126,7 @@ class RectorCommand extends BaseCommand
      *
      * @param \Cake\Console\ConsoleIo $io The io object
      * @param string $path The path to start scanning from
+     *
      * @return string|null The path to a vendor/autoload.php or null
      */
     protected function detectAutoload(ConsoleIo $io, string $path): ?string
@@ -164,6 +156,7 @@ class RectorCommand extends BaseCommand
      * Gets the option parser instance and configures it.
      *
      * @param \Cake\Console\ConsoleOptionParser $parser The parser to build
+     *
      * @return \Cake\Console\ConsoleOptionParser
      */
     protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <ruleset name="friendsofcake-search">
-	<config name="installed_paths" value="vendor/fig-r/psr2r-sniffer/PSR2R"/>
+	<config name="installed_paths" value="vendor/spryker/code-sniffer/Spryker"/>
 
 	<arg value="nps"/>
 
@@ -9,9 +9,9 @@
 	<file>tests/</file>
 
 	<exclude-pattern>*/tests/test_files/*</exclude-pattern>
-	<exclude-pattern>src/Rector</exclude-pattern>
-	<exclude-pattern>tests/test_apps</exclude-pattern>
-	<exclude-pattern>tests/TestCase/Rector</exclude-pattern>
+	<exclude-pattern>src/Rector/</exclude-pattern>
+	<exclude-pattern>tests/test_apps/</exclude-pattern>
+	<exclude-pattern>tests/TestCase/Rector/</exclude-pattern>
 
-	<rule ref="PSR2R"/>
+	<rule ref="Spryker"/>
 </ruleset>

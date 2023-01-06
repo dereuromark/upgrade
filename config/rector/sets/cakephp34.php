@@ -30,7 +30,7 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->ruleWithConfiguration(
         RenamePropertyRector::class,
-        [new RenameProperty('Cake\Network\Request', '_session', 'session')]
+        [new RenameProperty('Cake\Network\Request', '_session', 'session')],
     );
 
     $rectorConfig->ruleWithConfiguration(ModalToGetSetRector::class, [
@@ -48,7 +48,7 @@ return static function (RectorConfig $rectorConfig): void {
             'Cake\Database\Expression\QueryExpression',
             'tieWith',
             'getConjunction',
-            'setConjunction'
+            'setConjunction',
         ),
         new ModalToGetSet('Cake\Database\Expression\ValuesExpression', 'columns'),
         new ModalToGetSet('Cake\Database\Expression\ValuesExpression', 'values'),
@@ -59,7 +59,7 @@ return static function (RectorConfig $rectorConfig): void {
             'Cake\Database\Query',
             'bufferResults',
             'isBufferedResultsEnabled',
-            'enableBufferedResults'
+            'enableBufferedResults',
         ),
         new ModalToGetSet('Cake\Database\Schema\CachedCollection', 'cacheMetadata'),
         new ModalToGetSet('Cake\Database\Schema\TableSchema', 'options'),

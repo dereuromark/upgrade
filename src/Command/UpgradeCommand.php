@@ -1,19 +1,8 @@
 <?php
+
+
 declare(strict_types=1);
 
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         4.0.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
 namespace Cake\Upgrade\Command;
 
 use Cake\Console\Arguments;
@@ -26,13 +15,14 @@ use Cake\Console\ConsoleOptionParser;
  */
 class UpgradeCommand extends BaseCommand
 {
-    /**
-     * Execute.
-     *
-     * @param \Cake\Console\Arguments $args The command arguments.
-     * @param \Cake\Console\ConsoleIo $io The console io
-     * @return int|null
-     */
+ /**
+  * Execute.
+  *
+  * @param \Cake\Console\Arguments $args The command arguments.
+  * @param \Cake\Console\ConsoleIo $io The console io
+  *
+  * @return int|null
+  */
     public function execute(Arguments $args, ConsoleIo $io): ?int
     {
         $path = rtrim((string)$args->getArgument('path'), DIRECTORY_SEPARATOR);
@@ -63,6 +53,7 @@ class UpgradeCommand extends BaseCommand
         foreach ($paths as $directory) {
             if (!is_dir($directory)) {
                 $io->warning("{$directory} does not exist, skipping.");
+
                 continue;
             }
             $this->executeCommand(RectorCommand::class, $withDryRun(['--rules', 'cakephp40', $directory]), $io);
@@ -79,6 +70,7 @@ class UpgradeCommand extends BaseCommand
      * Gets the option parser instance and configures it.
      *
      * @param \Cake\Console\ConsoleOptionParser $parser The parser to build
+     *
      * @return \Cake\Console\ConsoleOptionParser
      */
     protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser

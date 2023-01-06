@@ -1,19 +1,8 @@
 <?php
+
+
 declare(strict_types=1);
 
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         1.0.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
 namespace Cake\Upgrade\Test;
 
 use Cake\Filesystem\Filesystem;
@@ -32,12 +21,20 @@ class TestCase extends CakeTestCase
      */
     protected $testAppDir;
 
+    /**
+     * @return void
+     */
     public function setUp(): void
     {
         parent::setUp();
         $this->useCommandRunner(true);
     }
 
+    /**
+     * @param string $testName
+     *
+     * @return void
+     */
     protected function setupTestApp(string $testName): void
     {
         $className = substr(static::class, strrpos(static::class, '\\') + 1, -strlen('Test'));
@@ -51,6 +48,9 @@ class TestCase extends CakeTestCase
         }
     }
 
+    /**
+     * @return void
+     */
     protected function assertTestAppUpgraded(): void
     {
         $appFs = $this->getFsInfo(TEST_APP);
@@ -62,6 +62,11 @@ class TestCase extends CakeTestCase
         }
     }
 
+    /**
+     * @param string $path
+     *
+     * @return array
+     */
     protected function getFsInfo(string $path): array
     {
         if ($path[-1] !== DS) {
@@ -73,9 +78,9 @@ class TestCase extends CakeTestCase
                 $path,
                 RecursiveDirectoryIterator::KEY_AS_PATHNAME |
                 RecursiveDirectoryIterator::CURRENT_AS_FILEINFO |
-                RecursiveDirectoryIterator::SKIP_DOTS
+                RecursiveDirectoryIterator::SKIP_DOTS,
             ),
-            RecursiveIteratorIterator::SELF_FIRST
+            RecursiveIteratorIterator::SELF_FIRST,
         );
 
         $tree = [];

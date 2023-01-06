@@ -24,7 +24,7 @@ return static function (RectorConfig $rectorConfig): void {
         new MethodCallRename(
             'Cake\Http\Middleware\CsrfProtectionMiddleware',
             'whitelistCallback',
-            'skipCheckCallback'
+            'skipCheckCallback',
         ),
     ]);
 

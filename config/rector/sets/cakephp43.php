@@ -16,7 +16,7 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->import(__DIR__ . '/../config.php');
     $rectorConfig->ruleWithConfiguration(
         RenameMethodRector::class,
-        [new MethodCallRename('Cake\Controller\Component', 'shutdown', 'afterFilter')]
+        [new MethodCallRename('Cake\Controller\Component', 'shutdown', 'afterFilter')],
     );
 
     $rectorConfig->ruleWithConfiguration(PropertyFetchToMethodCallRector::class, [
@@ -27,7 +27,7 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->ruleWithConfiguration(
         RemoveIntermediaryMethodRector::class,
-        [new RemoveIntermediaryMethod('getTableLocator', 'get', 'fetchTable')]
+        [new RemoveIntermediaryMethod('getTableLocator', 'get', 'fetchTable')],
     );
 
     $rectorConfig->ruleWithConfiguration(MethodCallToAnotherMethodCallWithArgumentsRector::class, [
@@ -41,7 +41,7 @@ return static function (RectorConfig $rectorConfig): void {
             'Cake\Database\DriverInterface',
             'supportsSavepoints',
             'supports',
-            ['savepoint']
+            ['savepoint'],
         ),
     ]);
 };

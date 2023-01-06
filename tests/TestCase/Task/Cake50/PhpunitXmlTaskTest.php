@@ -5,26 +5,27 @@ namespace Cake\Upgrade\Test\TestCase\Task\Cake50;
 use Cake\TestSuite\TestCase;
 use Cake\Upgrade\Task\Cake50\PhpunitXmlTask;
 
-class PhpunitXmlTaskTest extends TestCase {
+class PhpunitXmlTaskTest extends TestCase
+{
+ /**
+  * Basic test to simulate running on this repo
+  *
+  * Should return all files in the src directory of this repo
+  *
+  * @return void
+  */
+    public function testRun()
+    {
+        $path = TESTS . 'test_files' . DS . 'Task' . DS . 'Cake50' . DS;
 
-	/**
-	 * Basic test to simulate running on this repo
-	 *
-	 * Should return all files in the src directory of this repo
-	 *
-	 * @return void
-	 */
-	public function testRun() {
-		$path = TESTS . 'test_files' . DS . 'Task' . DS . 'Cake50' . DS;
+        $task = new PhpunitXmlTask(['path' => $path, 'skipSchemaCheck' => true]);
+        $task->run($path);
 
-		$task = new PhpunitXmlTask(['path' => $path, 'skipSchemaCheck' => true]);
-		$task->run($path);
+        $changes = $task->getChanges();
+        $this->assertCount(1, $changes);
 
-		$changes = $task->getChanges();
-		$this->assertCount(1, $changes);
-
-		$changesString = (string)$changes;
-		$expected = <<<'TXT'
+        $changesString = (string)$changes;
+        $expected = <<<'TXT'
 phpunit.xml.dist
 -<phpunit
 -    colors="true"
@@ -43,9 +44,16 @@ phpunit.xml.dist
 +    <extensions>
 +        <extension class="\Cake\TestSuite\Fixture\PHPUnitExtension"/>
 +    </extensions>
+-    <filter>
+-        <whitelist>
++    <coverage>
++        <include>
+-        </whitelist>
+-    </filter>
++        </include>
++    </coverage>
 
 TXT;
-		$this->assertTextEquals($expected, $changesString);
-	}
-
+        $this->assertTextEquals($expected, $changesString);
+    }
 }
