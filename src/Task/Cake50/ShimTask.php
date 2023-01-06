@@ -9,7 +9,7 @@ use Cake\Upgrade\Task\Task;
  * Adjusts:
  * - ->loadModel()-> to ->fetchTable()->
  */
-class BasicsTask extends Task implements FileTaskInterface
+class ShimTask extends Task implements FileTaskInterface
 {
  /**
   * @param string $path
@@ -30,11 +30,7 @@ class BasicsTask extends Task implements FileTaskInterface
     {
         $content = (string)file_get_contents($path);
 
-        $newContent = preg_replace('#\bTableRegistry::exists\(#', 'TableRegistry::getTableLocator()->exists(', $content);
-        $newContent = preg_replace('#\bTableRegistry::get\(#', 'TableRegistry::getTableLocator()->get(', $newContent);
-
-        $newContent = preg_replace('#\bprotected \$modelClass =#', 'protected ?string $defaultTable = ', $newContent);
-        $newContent = preg_replace('#\b(public|protected) \$paginate = \[#', 'protected array $paginate = [', $newContent);
+        $newContent = preg_replace('#\bCake\\\\Filesystem\\\\Folder\b#', 'Shim\Filesystem\Folder', $content);
 
         $this->persistFile($path, $content, $newContent);
     }

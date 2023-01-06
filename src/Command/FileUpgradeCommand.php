@@ -21,7 +21,9 @@ use Cake\Upgrade\Task\Cake50\PhpunitXmlTask;
 use Cake\Upgrade\Task\Cake50\ReadmeTask;
 use Cake\Upgrade\Task\Cake50\RemoveOutdatedCodeTask;
 use Cake\Upgrade\Task\Cake50\ShellToCommandTask;
+use Cake\Upgrade\Task\Cake50\ShimTask;
 use Cake\Upgrade\Task\Cake50\TemplatesFormHelperTask;
+use Cake\Upgrade\Task\Cake50\TestsBasicsTask;
 use Cake\Upgrade\Task\Cake50\TestsBootstrapFixtureTask;
 use Cake\Upgrade\Task\Cake50\TestsCommandTask;
 use Cake\Upgrade\Task\Cake50\TestsControllerInstantiationTask;
@@ -250,10 +252,12 @@ class FileUpgradeCommand extends Command
             TestsFixtureSchemaTask::class,
             TestsControllerInstantiationTask::class,
             TestsCommandTask::class,
+            TestsBasicsTask::class,
             PhpunitXmlTask::class,
             //PhpcsPsr2rTask::class,
             RemoveOutdatedCodeTask::class,
             TemplatesFormHelperTask::class,
+            ShimTask::class,
         ];
 
         return $tasks;
