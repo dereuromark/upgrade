@@ -39,13 +39,6 @@ use InvalidArgumentException;
 
 class FileUpgradeCommand extends Command
 {
- /**
-  * The name of this command.
-  *
-  * @var string
-  */
-    protected $name = 'upgrade';
-
     /**
      * Any levels always include previous ones.
      *
