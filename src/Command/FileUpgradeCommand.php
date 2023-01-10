@@ -28,6 +28,7 @@ use Cake\Upgrade\Task\Cake50\TestsBootstrapFixtureTask;
 use Cake\Upgrade\Task\Cake50\TestsCommandTask;
 use Cake\Upgrade\Task\Cake50\TestsControllerInstantiationTask;
 use Cake\Upgrade\Task\Cake50\TestsFixtureSchemaTask;
+use Cake\Upgrade\Task\Cake50\TimeTask;
 use Cake\Upgrade\Task\Cake50\TypedClosureTask;
 use Cake\Upgrade\Task\Cake50\TypedPropertyEntityTask;
 use Cake\Upgrade\Task\Cake50\TypedPropertyFixtureTask;
@@ -241,6 +242,7 @@ class FileUpgradeCommand extends Command
             ModelHookTask::class,
             LoadModelTask::class,
             TypeFactoryTask::class,
+            TimeTask::class,
             ShellToCommandTask::class,
             TypedClosureTask::class,
             TypedPropertyTask::class,

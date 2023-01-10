@@ -32,7 +32,7 @@ class TestsControllerInstantiationTask extends Task implements FileTaskInterface
         $newContent = preg_replace('# = new Controller\(\)#', ' = new Controller(new \Cake\Http\ServerRequest())', $content);
 
         $newContent = preg_replace('#\bnew ComponentRegistry\(\)#', 'new ComponentRegistry(new \Cake\Controller\Controller(new \Cake\Http\ServerRequest()))', $newContent);
-        $newContent = preg_replace('#Test extends IntegrationTestCase \{#', 'Test extends \Cake\TestSuite\TestCase', $newContent);
+        $newContent = preg_replace('#Test extends IntegrationTestCase\b#', 'Test extends \Cake\TestSuite\TestCase', $newContent);
 
         $this->persistFile($path, $content, $newContent);
     }
