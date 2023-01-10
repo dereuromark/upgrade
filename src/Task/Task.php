@@ -65,6 +65,10 @@ abstract class Task
         }
 
         file_put_contents($filePath, $newContent);
+
+        if ($content === '') {
+            exec('git add ' . $filePath);
+        }
     }
 
     /**
