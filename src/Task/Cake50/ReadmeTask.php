@@ -32,6 +32,10 @@ class ReadmeTask extends Task implements RepoTaskInterface
     public function run(string $path): void
     {
         $filePath = $path . 'README.md';
+        if (!file_exists($filePath)) {
+            $filePath = $path . 'readme.md';
+        }
+
         $content = (string)file_get_contents($filePath);
 
         $version = static::TARGET_VERSION_PHP;

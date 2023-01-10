@@ -95,6 +95,6 @@ class ComposerTask extends Task implements RepoTaskInterface
             return '"dereuromark/cakephp-' . $name . '": "' . $constraint . '"';
         };
 
-        return preg_replace_callback('#"dereuromark/cakephp-(\w+)": "(.+)"#', $callable, $content);
+        return preg_replace_callback('#"dereuromark/cakephp-([\w-]+)": "(.+)"#', $callable, $content);
     }
 }
