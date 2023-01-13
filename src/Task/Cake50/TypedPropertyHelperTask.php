@@ -7,9 +7,9 @@ use Cake\Upgrade\Task\Task;
 
 /**
  * Adjusts:
- * - protected $_defaultConfig => protected array $_defaultConfig
+ * - protected $helpers => protected array $helpers
  */
-class TypedPropertyTestCaseTask extends Task implements FileTaskInterface
+class TypedPropertyHelperTask extends Task implements FileTaskInterface
 {
     /**
      * @param string $path
@@ -18,7 +18,7 @@ class TypedPropertyTestCaseTask extends Task implements FileTaskInterface
      */
     public function getFiles(string $path): array
     {
-        return $this->collectFiles($path, 'php', ['tests/TestCase/']);
+        return $this->collectFiles($path, 'php', ['src/View/Helper/']);
     }
 
     /**
@@ -29,7 +29,7 @@ class TypedPropertyTestCaseTask extends Task implements FileTaskInterface
     public function run(string $path): void
     {
         $content = (string)file_get_contents($path);
-        $newContent = preg_replace('#\b(protected|public) \$fixtures = \[#', 'protected array $fixtures = [', $content);
+        $newContent = preg_replace('#\b(public|protected) \$helpers = \[#', 'protected array $helpers = [', $content);
 
         $this->persistFile($path, $content, $newContent);
     }

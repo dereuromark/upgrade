@@ -32,6 +32,7 @@ use Cake\Upgrade\Task\Cake50\TimeTask;
 use Cake\Upgrade\Task\Cake50\TypedClosureTask;
 use Cake\Upgrade\Task\Cake50\TypedPropertyEntityTask;
 use Cake\Upgrade\Task\Cake50\TypedPropertyFixtureTask;
+use Cake\Upgrade\Task\Cake50\TypedPropertyHelperTask;
 use Cake\Upgrade\Task\Cake50\TypedPropertyPluginTask;
 use Cake\Upgrade\Task\Cake50\TypedPropertyTask;
 use Cake\Upgrade\Task\Cake50\TypedPropertyTestCaseTask;
@@ -249,6 +250,7 @@ class FileUpgradeCommand extends Command
             TypedPropertyPluginTask::class,
             TypedPropertyEntityTask::class,
             TypedPropertyFixtureTask::class,
+            TypedPropertyHelperTask::class,
             TypedPropertyTestCaseTask::class,
             TestsBootstrapFixtureTask::class,
             TestsFixtureSchemaTask::class,

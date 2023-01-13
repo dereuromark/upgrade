@@ -8,6 +8,12 @@ use Cake\Upgrade\Task\Task;
 /**
  * Adjusts:
  * - protected $_defaultConfig => protected array $_defaultConfig
+ * - protected $name => protected ?string $name
+ * - protected $bootstrapEnabled => protected bool $bootstrapEnabled
+ * - protected $consoleEnabled => protected bool $consoleEnabled
+ * - protected $middlewareEnabled => protected bool $middlewareEnabled
+ * - protected $servicesEnabled => protected bool $servicesEnabled
+ * - protected $routesEnabled => protected bool $routesEnabled
  */
 class TypedPropertyPluginTask extends Task implements RepoTaskInterface
 {
@@ -39,6 +45,8 @@ class TypedPropertyPluginTask extends Task implements RepoTaskInterface
             $from[] = 'protected $' . $property . ' =';
             $to[] = 'protected bool $' . $property . ' =';
         }
+        $from[] = 'protected $name =';
+        $to[] = 'protected ?string $name =';
 
         $content = (string)file_get_contents($filePath);
         $newContent = str_replace($from, $to, $content);
