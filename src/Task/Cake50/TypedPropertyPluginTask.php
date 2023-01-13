@@ -8,7 +8,12 @@ use Cake\Upgrade\Task\Task;
 /**
  * Adjusts:
  * - protected $_defaultConfig => protected array $_defaultConfig
- * - protected $name => protected ?string $name;
+ * - protected $name => protected ?string $name
+ * - protected $bootstrapEnabled => protected bool $bootstrapEnabled
+ * - protected $consoleEnabled => protected bool $consoleEnabled
+ * - protected $middlewareEnabled => protected bool $middlewareEnabled
+ * - protected $servicesEnabled => protected bool $servicesEnabled
+ * - protected $routesEnabled => protected bool $routesEnabled
  */
 class TypedPropertyPluginTask extends Task implements RepoTaskInterface
 {
