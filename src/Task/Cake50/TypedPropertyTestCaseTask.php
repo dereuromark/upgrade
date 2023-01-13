@@ -29,7 +29,7 @@ class TypedPropertyTestCaseTask extends Task implements FileTaskInterface
     public function run(string $path): void
     {
         $content = (string)file_get_contents($path);
-        $newContent = preg_replace('#\bprotected \$fixtures = \[#', 'protected array $fixtures = [', $content);
+        $newContent = preg_replace('#\b(protected|public) \$fixtures = \[#', 'protected array $fixtures = [', $content);
 
         $this->persistFile($path, $content, $newContent);
     }
