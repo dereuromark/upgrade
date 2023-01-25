@@ -13,6 +13,7 @@ use Cake\Upgrade\Task\Cake50\BasicsTask;
 use Cake\Upgrade\Task\Cake50\CiTask;
 use Cake\Upgrade\Task\Cake50\ComposerPsr2rTask;
 use Cake\Upgrade\Task\Cake50\ComposerTask;
+use Cake\Upgrade\Task\Cake50\ConfigTask;
 use Cake\Upgrade\Task\Cake50\DatabaseTypeDriverTask;
 use Cake\Upgrade\Task\Cake50\LoadModelTask;
 use Cake\Upgrade\Task\Cake50\ModelHookTask;
@@ -239,6 +240,7 @@ class FileUpgradeCommand extends Command
             CiTask::class,
             BasicsTask::class,
             DatabaseTypeDriverTask::class,
+            ConfigTask::class,
             ModelValidatorTask::class,
             ModelHookTask::class,
             LoadModelTask::class,
