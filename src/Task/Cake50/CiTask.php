@@ -35,6 +35,10 @@ class CiTask extends Task implements RepoTaskInterface
     public function run(string $path): void
     {
         $filePath = $path . '.github/workflows/' . static::FILE_NAME;
+        if (!file_exists($filePath)) {
+            return;
+        }
+
         $content = (string)file_get_contents($filePath);
 
         $callable = function ($matches) {
