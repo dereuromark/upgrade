@@ -7,7 +7,8 @@ use Cake\Upgrade\Task\Task;
 
 /**
  * Adjusts:
- * - ->loadModel()-> to ->fetchTable()->
+ * - $modelClass to $defaultTable
+ * - public $paginate to protected array $paginate
  */
 class BasicsTask extends Task implements FileTaskInterface
 {

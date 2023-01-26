@@ -3,7 +3,9 @@
 namespace SomePlugin\Controller;
 class SomeController {
 
-	public function simple() {
+    public $paginate = ['order' => ['Companies.name' => 'ASC']];
+
+    public function simple() {
 		$modelName = $this->getController()->loadModel()->getAlias();
 	}
 
