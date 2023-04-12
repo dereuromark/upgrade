@@ -92,6 +92,16 @@ class FileUpgradeCommand extends Command
             throw new StopException();
         }
 
+        $plugin = $args->getOption('plugin');
+        if ($plugin) {
+            $path .= 'plugins/' . $plugin . DS;
+            if (!is_dir($path)) {
+                $io->error('Plugin path not found: ' . $path);
+
+                throw new StopException();
+            }
+        }
+
         $this->process($path, $args, $io);
 
         $io->out('Done :)');
@@ -120,6 +130,10 @@ class FileUpgradeCommand extends Command
             'help' => 'Dry run.',
             'short' => 'd',
             'boolean' => true,
+        ]);
+        $parser->addOption('plugin', [
+            'help' => 'Plugin.',
+            'short' => 'p',
         ]);
 
         return $parser;

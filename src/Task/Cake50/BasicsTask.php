@@ -37,6 +37,10 @@ class BasicsTask extends Task implements FileTaskInterface
         $newContent = preg_replace('#\bprotected \$modelClass =#', 'protected ?string $defaultTable = ', $newContent);
         $newContent = preg_replace('#\b(public|protected) \$paginate = \[#', 'protected array $paginate = [', $newContent);
 
+        if (str_contains($newContent, 'public $paginate')) {
+            //dd($newContent);
+        }
+
         $this->persistFile($path, $content, $newContent);
     }
 }

@@ -42,6 +42,10 @@ class ComposerTask extends Task implements RepoTaskInterface
     public function run(string $path): void
     {
         $filePath = $path . 'composer.json';
+        if (!file_exists($filePath)) {
+            return;
+        }
+
         $content = (string)file_get_contents($filePath);
 
         $newContent = str_replace('"phpunit/phpunit": "^9.5"', '"phpunit/phpunit": "^9.5.16"', $content);

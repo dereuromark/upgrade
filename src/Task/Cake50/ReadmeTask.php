@@ -35,6 +35,9 @@ class ReadmeTask extends Task implements RepoTaskInterface
         if (!file_exists($filePath)) {
             $filePath = $path . 'readme.md';
         }
+        if (!file_exists($filePath)) {
+            return;
+        }
 
         $content = (string)file_get_contents($filePath);
 
