@@ -51,7 +51,6 @@ class Application implements ConsoleApplicationInterface
     {
         $commands->add('upgrade', UpgradeCommand::class);
         $commands->add('upgrade files', FileUpgradeCommand::class);
-        $commands->add('upgrade rector', RectorCommand::class);
 
         return $commands;
     }

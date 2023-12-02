@@ -14,15 +14,6 @@ Note: Make sure you already ran the 3.x ones here on the code to be up to date.
 
 
 
-## Upgrade shell "Deluxe Edition"
-
-Mainly for simple regex based 3.x to 4.x upgrade.
-
-Currently running as
-```
-bin/cake upgrade_legacy {task}
-```
-
 ## Tasks available (upgraded for CakePHP 4)
 
 ### method_names

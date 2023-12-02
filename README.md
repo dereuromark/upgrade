@@ -57,12 +57,10 @@ Alternatively, you can lock it down to a stable version and then update.
 
 ## IMPORTANT NOTICE
 
-This tool is a split-off off the original CakePHP upgrade tool and provides additional fixers:
-- Templates
-- Url
-- Locale (fixing locale files)
-- Model to Table (making the model files to Table class files)
-- Fixture loading and casing
+This tool is an add-on to original CakePHP upgrade tool and provides additional fixers:
+- Skeleton
+
+The FileUpgrade tool also:
 - Custom (tons of custom fixes)
 
 Feel free to manually port those things back into the core one.
@@ -70,15 +68,11 @@ Feel free to manually port those things back into the core one.
 ## Usage
 
 ### Upgrade command
-All at once:
+Important upgrade steps:
+- Skeleton upgrade (all skeleton files)
+
 ```bash
 bin/cake upgrade /home/mark/Sites/my-app
-```
-### Rector command
-```bash
-bin/cake upgrade rector /home/mark/Sites/my-app/src
-bin/cake upgrade rector /home/mark/Sites/my-app/tests
-bin/cake upgrade rector /home/mark/Sites/my-app/config
 ```
 
 ### Upgrade files

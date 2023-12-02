@@ -37,40 +37,16 @@ class UpgradeCommand extends BaseCommand
     {
         $path = rtrim((string)$args->getArgument('path'), DIRECTORY_SEPARATOR);
         $path = realpath($path);
-        $paths = [
-            'src' => $path . '/src',
-            'tests' => $path . '/tests',
-            'config' => $path . '/config',
-            'tempates' => $path . '/templates',
-        ];
-        $withDryRun = function (array $params) use ($args): array {
-            if ($args->getOption('dry-run')) {
-                array_unshift($params, '--dry-run');
 
-                return $params;
-            }
-
-            return $params;
-        };
-
-        $io->out('<info>Moving templates</info>');
-        $this->executeCommand(FileRenameCommand::class, $withDryRun(['templates', $path]), $io);
-
-        $io->out('<info>Moving locale files</info>');
-        $this->executeCommand(FileRenameCommand::class, $withDryRun(['locales', $path]), $io);
-
-        $io->out('<info>Applying cakephp40 Rector rules</info>');
-        foreach ($paths as $directory) {
-            if (!is_dir($directory)) {
-                $io->warning("{$directory} does not exist, skipping.");
-                continue;
-            }
-            $this->executeCommand(RectorCommand::class, $withDryRun(['--rules', 'cakephp40', $directory]), $io);
+        $io->out('Upgrading skeleton. You can diff and revert anything that needs to stay after the operation!');
+        $continue = $io->askChoice('Make sure you commited/backup up your files. Continue?', ['y', 'n'], 'n');
+        if ($continue !== 'y') {
+            $io->abort('Aborted');
         }
-        $io->out('<info>Applying phpunit80 Rector rules</info>');
-        $this->executeCommand(RectorCommand::class, $withDryRun(['--rules', 'phpunit80', $paths['tests']]), $io);
 
-        $io->out('Next upgrade your <info>composer.json</info>.');
+        $this->skeletonUpgrade($args);
+
+        $io->warning('Now check the changes via diff in your IDE and revert the lines you want to keep.');
 
         return static::CODE_SUCCESS;
     }
@@ -107,5 +83,15 @@ class UpgradeCommand extends BaseCommand
             ]);
 
         return $parser;
+    }
+
+    /**
+     * @param \Cake\Console\Arguments $args
+     *
+     * @return void
+     */
+    protected function skeletonUpgrade(Arguments $args): void
+    {
+
     }
 }
