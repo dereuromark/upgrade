@@ -1,7 +1,9 @@
 parameters:
-	level: 3
+	level: 7
 	paths:
 		- src/
+	checkMissingIterableValueType: false
+	checkGenericClassInNonGenericObjectType: false
 	bootstrapFiles:
 		- tests/bootstrap.php
 	ignoreErrors:

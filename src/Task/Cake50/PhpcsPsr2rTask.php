@@ -42,7 +42,7 @@ class PhpcsPsr2rTask extends Task implements RepoTaskInterface {
 			return $content;
 		}
 
-		$xmlData = file_get_contents(ROOT . DS . 'resources' . DS . 'phpcs.xml');
+		$xmlData = (string)file_get_contents(ROOT . DS . 'resources' . DS . 'phpcs.xml');
 
 		preg_match('#^(\s+)\<rule ref="PSR2R"/\>#mu', $content, $matches);
 		$indentation = $matches ? $matches[1] : '    ';

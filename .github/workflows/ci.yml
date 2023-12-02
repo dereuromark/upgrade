@@ -3,8 +3,6 @@ name: CI
 on:
   push:
   pull_request:
-    branches:
-      - '*'
 
 jobs:
   testsuite:
@@ -12,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: ['8.1', '8.2']
+        php-version: ['8.1', '8.3']
         prefer-lowest: ['']
         include:
           - php-version: '8.1'
@@ -46,8 +44,6 @@ jobs:
       run: |
         if ${{ matrix.prefer-lowest == 'prefer-lowest' }}; then
           make install-dev-lowest
-        elif ${{ matrix.php-version == '8.1' }}; then
-          make install-dev-ignore-reqs
         else
           make install-dev
         fi
@@ -98,6 +94,9 @@ jobs:
 
     - name: Composer install
       run: make install-dev
+
+    - name: Run PHPStan
+      run: vendor/bin/phpstan analyze
 
     - name: Run PHP CodeSniffer
       run: vendor/bin/phpcs --report=checkstyle

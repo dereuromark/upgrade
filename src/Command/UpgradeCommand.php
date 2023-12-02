@@ -9,11 +9,12 @@ declare(strict_types=1);
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         4.0.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
+ * @copyright Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+ * @link https://cakephp.org CakePHP(tm) Project
+ * @since 4.0.0
+ * @license https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Cake\Upgrade\Command;
 
 use Cake\Console\Arguments;
@@ -24,8 +25,8 @@ use Cake\Console\ConsoleOptionParser;
 /**
  * Entry point into the upgrade process
  */
-class UpgradeCommand extends BaseCommand
-{
+class UpgradeCommand extends BaseCommand {
+
 	/**
 	 * @var \Cake\Console\Arguments
 	 */
@@ -37,77 +38,77 @@ class UpgradeCommand extends BaseCommand
 	protected ConsoleIo $io;
 
 	/**
-     * Execute.
-     *
-     * @param \Cake\Console\Arguments $args The command arguments.
-     * @param \Cake\Console\ConsoleIo $io The console io
-     * @return int|null
-     */
-    public function execute(Arguments $args, ConsoleIo $io): ?int
-    {
+	 * Execute.
+	 *
+	 * @param \Cake\Console\Arguments $args The command arguments.
+	 * @param \Cake\Console\ConsoleIo $io The console io
+	 * @return int|null
+	 */
+	public function execute(Arguments $args, ConsoleIo $io): ?int {
 		$this->args = $args;
 		$this->io = $io;
 
-        $path = rtrim((string)$args->getArgument('path'), DIRECTORY_SEPARATOR);
-        $path = realpath($path);
+		$path = rtrim((string)$args->getArgument('path'), DIRECTORY_SEPARATOR);
+		$path = realpath($path);
+		if ($path === false) {
+			$io->abort('Path cannot be read. Maybe a typo?');
+		}
 
-        $io->out('Upgrading skeleton. You can diff and revert anything that needs to stay after the operation!');
-        $continue = $io->askChoice('Make sure you commited/backup up your files. Continue?', ['y', 'n'], 'n');
-        if ($continue !== 'y') {
-            $io->abort('Aborted');
-        }
+		$io->out('Upgrading skeleton. You can diff and revert anything that needs to stay after the operation!');
+		$continue = $io->askChoice('Make sure you commited/backup up your files. Continue?', ['y', 'n'], 'n');
+		if ($continue !== 'y') {
+			$io->abort('Aborted');
+		}
 
-        $result = $this->skeletonUpgrade($path);
+		$result = $this->skeletonUpgrade($path);
 		if (!$result) {
 			$io->error('Could not fully process the upgrade task');
 		}
 
-        $io->warning('Now check the changes via diff in your IDE and revert the lines you want to keep.');
+		$io->warning('Now check the changes via diff in your IDE and revert the lines you want to keep.');
 
-        return static::CODE_SUCCESS;
-    }
+		return static::CODE_SUCCESS;
+	}
 
-    /**
-     * Gets the option parser instance and configures it.
-     *
-     * @param \Cake\Console\ConsoleOptionParser $parser The parser to build
-     * @return \Cake\Console\ConsoleOptionParser
-     */
-    protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
-    {
-        $parser
-            ->setDescription([
-                '<question>Upgrade tool addon for CakePHP 5.x</question>',
-                '',
-                '<info>Runs the following tasks:</info>',
-                '',
-                '- skeleton',
-            ])
-            ->addArgument('path', [
-                'help' => 'The path to the application or plugin.',
-                'required' => true,
-            ])
+	/**
+	 * Gets the option parser instance and configures it.
+	 *
+	 * @param \Cake\Console\ConsoleOptionParser $parser The parser to build
+	 * @return \Cake\Console\ConsoleOptionParser
+	 */
+	protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser {
+		$parser
+			->setDescription([
+				'<question>Upgrade tool addon for CakePHP 5.x</question>',
+				'',
+				'<info>Runs the following tasks:</info>',
+				'',
+				'- skeleton',
+			])
+			->addArgument('path', [
+				'help' => 'The path to the application or plugin.',
+				'required' => true,
+			])
 			->addOption('overwrite', [
 				'help' => 'Overwrite.',
 				'boolean' => true,
 				'short' => 'o',
 			])
-            ->addOption('dry-run', [
-                'help' => 'Dry run.',
-                'boolean' => true,
+			->addOption('dry-run', [
+				'help' => 'Dry run.',
+				'boolean' => true,
 				'short' => 'd',
-            ]);
+			]);
 
-        return $parser;
-    }
+		return $parser;
+	}
 
 	/**
 	 * @param string $path
 	 *
 	 * @return bool
 	 */
-    protected function skeletonUpgrade(string $path): bool
-    {
+	protected function skeletonUpgrade(string $path): bool {
 		$sourcePath = ROOT . DS . 'tmp' . DS . 'app' . DS;
 		$this->prepareSkeletonAppCode($sourcePath);
 
@@ -145,7 +146,7 @@ class UpgradeCommand extends BaseCommand
 		$ret |= $this->_addFile('config' . DS . 'app.php', $sourcePath, $path, 'config' . DS . 'app.php');
 
 		return (bool)$ret;
-    }
+	}
 
 	/**
 	 * _addFile()
@@ -200,4 +201,5 @@ class UpgradeCommand extends BaseCommand
 
 		exec('cd ' . $sourcePath . ' && git pull');
 	}
+
 }

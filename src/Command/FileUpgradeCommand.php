@@ -75,6 +75,10 @@ class FileUpgradeCommand extends Command {
 			$path .= DS;
 		}
 
+		if ($path === false) {
+			$io->abort('Path cannot be read. Maybe a typo?');
+		}
+
 		if (!is_dir($path)) {
 			$io->error('Project path not found: ' . $args->getArgumentAt(0));
 
@@ -127,7 +131,7 @@ class FileUpgradeCommand extends Command {
 	protected function process(string $path, Arguments $args, ConsoleIo $io) {
 		$io->out('Processing: ' . $path);
 		$io->out('Sets:');
-		$levels = $this->levels($args->getOption('set'));
+		$levels = $this->levels((string)$args->getOption('set'));
 
 		$changeSet = new ChangeSet();
 		foreach ($levels as $level) {
@@ -207,7 +211,7 @@ class FileUpgradeCommand extends Command {
 	}
 
 	/**
-	 * @return array<string>
+	 * @return array<class-string<\Cake\Upgrade\Task\TaskInterface>>
 	 */
 	protected function tasks(): array {
 		//TODO: make more flexible

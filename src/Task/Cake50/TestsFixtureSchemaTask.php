@@ -49,7 +49,7 @@ class TestsFixtureSchemaTask extends Task implements RepoTaskInterface {
 	 */
 	protected function containsFixtureSchema(array $files): bool {
 		foreach ($files as $file) {
-			$content = file_get_contents($file);
+			$content = (string)file_get_contents($file);
 			if (strpos($content, 'public $fields = [') || strpos($content, 'public array $fields = [')) {
 				return true;
 			}

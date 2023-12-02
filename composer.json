@@ -10,10 +10,13 @@
 		"sebastian/diff": "^4.0.4",
 		"cakephp/cakephp": "5.x-dev as 5.0.3",
         "nette/utils": "^3.2",
-        "rector/rector": "0.17.13",
         "symfony/string": "^6.0",
         "webmozart/assert": "^1.11"
     },
+	"require-dev": {
+		"fig-r/psr2r-sniffer": "dev-next",
+		"phpstan/phpstan": "^1.10"
+	},
     "autoload": {
         "psr-4": {
             "Cake\\Upgrade\\": "src/"
