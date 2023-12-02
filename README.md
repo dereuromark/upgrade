@@ -61,7 +61,7 @@ This tool is an add-on to original CakePHP upgrade tool and provides additional 
 - Skeleton
 
 The FileUpgrade tool also:
-- Custom (tons of custom fixes)
+- see `src/Task/?` (tons of custom fixes)
 
 Feel free to manually port those things back into the core one.
 

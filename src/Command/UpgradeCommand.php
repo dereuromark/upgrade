@@ -26,7 +26,17 @@ use Cake\Console\ConsoleOptionParser;
  */
 class UpgradeCommand extends BaseCommand
 {
-    /**
+	/**
+	 * @var \Cake\Console\Arguments
+	 */
+	protected Arguments $args;
+
+	/**
+	 * @var \Cake\Console\ConsoleIo
+	 */
+	protected ConsoleIo $io;
+
+	/**
      * Execute.
      *
      * @param \Cake\Console\Arguments $args The command arguments.
@@ -35,6 +45,9 @@ class UpgradeCommand extends BaseCommand
      */
     public function execute(Arguments $args, ConsoleIo $io): ?int
     {
+		$this->args = $args;
+		$this->io = $io;
+
         $path = rtrim((string)$args->getArgument('path'), DIRECTORY_SEPARATOR);
         $path = realpath($path);
 
@@ -44,7 +57,10 @@ class UpgradeCommand extends BaseCommand
             $io->abort('Aborted');
         }
 
-        $this->skeletonUpgrade($args);
+        $result = $this->skeletonUpgrade($path);
+		if (!$result) {
+			$io->error('Could not fully process the upgrade task');
+		}
 
         $io->warning('Now check the changes via diff in your IDE and revert the lines you want to keep.');
 
@@ -61,37 +77,127 @@ class UpgradeCommand extends BaseCommand
     {
         $parser
             ->setDescription([
-                '<question>Upgrade tool for CakePHP 4.0</question>',
+                '<question>Upgrade tool addon for CakePHP 5.x</question>',
                 '',
-                'Runs all of the sub commands on an application/plugin. The <info>path</info> ' .
-                'argument should be the application or plugin root directory.',
+                '<info>Runs the following tasks:</info>',
                 '',
-                'You can also run each command individually on specific directories if you want more control.',
-                '',
-                '<info>Sub-Commands</info>',
-                '',
-                '- file_rename  Rename template and locale files',
-                '- rector       Apply rector rules for phpunit80 and cakephp40',
+                '- skeleton',
             ])
             ->addArgument('path', [
                 'help' => 'The path to the application or plugin.',
                 'required' => true,
             ])
+			->addOption('overwrite', [
+				'help' => 'Overwrite.',
+				'boolean' => true,
+				'short' => 'o',
+			])
             ->addOption('dry-run', [
                 'help' => 'Dry run.',
                 'boolean' => true,
+				'short' => 'd',
             ]);
 
         return $parser;
     }
 
-    /**
-     * @param \Cake\Console\Arguments $args
-     *
-     * @return void
-     */
-    protected function skeletonUpgrade(Arguments $args): void
+	/**
+	 * @param string $path
+	 *
+	 * @return bool
+	 */
+    protected function skeletonUpgrade(string $path): bool
     {
+		$sourcePath = ROOT . DS . 'tmp' . DS . 'app' . DS;
+		$this->prepareSkeletonAppCode($sourcePath);
 
+		$files = [
+			'bin' . DS . 'cake',
+			'bin' . DS . 'cake.bat',
+			'bin' . DS . 'cake.php',
+			'phpunit.xml.dist',
+			'index.php',
+			'webroot' . DS . 'index.php',
+			'webroot' . DS . 'css' . DS . 'cake.css',
+			'webroot' . DS . 'css' . DS . 'home.css',
+			'webroot' . DS . 'css' . DS . 'milligram.min.css',
+			'webroot' . DS . 'css' . DS . 'normalize.min.css',
+			'config' . DS . 'bootstrap.php',
+			'config' . DS . 'bootstrap_cli.php',
+			'config' . DS . 'paths.php',
+			'config' . DS . 'routes.php',
+			'tests' . DS . 'bootstrap.php',
+			'src' . DS . 'Application.php',
+			'src' . DS . 'View' . DS . 'AppView.php',
+			'src' . DS . 'View' . DS . 'AjaxView.php',
+			'src' . DS . 'Controller' . DS . 'PagesController.php',
+			'templates' . DS . 'Error' . DS . 'error400.php',
+			'templates' . DS . 'Error' . DS . 'error500.php',
+			'templates' . DS . 'layout' . DS . 'error.php',
+			'templates' . DS . 'element' . DS . 'flash' . DS . 'default.php',
+			'templates' . DS . 'element' . DS . 'flash' . DS . 'error.php',
+			'templates' . DS . 'element' . DS . 'flash' . DS . 'success.php',
+		];
+		$ret = 0;
+		foreach ($files as $file) {
+			$ret |= $this->_addFile($file, $sourcePath, $path);
+		}
+		$ret |= $this->_addFile('config' . DS . 'app.php', $sourcePath, $path, 'config' . DS . 'app.php');
+
+		return (bool)$ret;
     }
+
+	/**
+	 * _addFile()
+	 *
+	 * @param string $file
+	 * @param string $sourcePath
+	 * @param string $targetPath
+	 * @param string|null $targetFile
+	 * @return bool
+	 */
+	protected function _addFile($file, $sourcePath, $targetPath, $targetFile = null) {
+		$result = false;
+
+		if (!file_exists($sourcePath . $file)) {
+			$this->io->info('Source file ' . $file . 'cannot be found, skipping.');
+
+			return false;
+		}
+
+		$fileExists = file_exists($targetPath . $file);
+		if (!$fileExists || $this->args->getOption('overwrite')) {
+			$result = true;
+			if (empty($this->params['dry-run'])) {
+				if ($targetFile === null) {
+					$targetFile = $file;
+				}
+				$targetPathName = $targetPath . dirname($targetFile);
+				if (!is_dir($targetPathName)) {
+					mkdir($targetPathName, 0755, true);
+				}
+				$result = copy($sourcePath . $file, $targetPath . $targetFile);
+			}
+			$this->io->verbose(($fileExists ? 'Replacing' : 'Adding') . ' ' . $file);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * @param string $sourcePath
+	 *
+	 * @return void
+	 */
+	protected function prepareSkeletonAppCode(string $sourcePath): void {
+		if (!is_dir($sourcePath)) {
+			$parentPath = dirname($sourcePath);
+			if (!is_dir($parentPath)) {
+				mkdir($parentPath, 0770, true);
+			}
+			exec('cd ' . $parentPath . ' && git clone https://github.com/cakephp/app.git');
+		}
+
+		exec('cd ' . $sourcePath . ' && git pull');
+	}
 }
