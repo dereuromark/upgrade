@@ -1,6 +1,7 @@
 # CakePHP Upgrade tool
-[![Build Status](https://api.travis-ci.org/dereuromark/upgrade.svg?branch=develop)](https://travis-ci.org/dereuromark/upgrade)
+[![CI](https://github.com/dereuromark/upgrade/actions/workflows/ci.yml/badge.svg)](https://github.com/dereuromark/upgrade/actions/workflows/ci.yml)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.1-8892BF.svg)](https://php.net/)
+[![PHPStan](https://img.shields.io/badge/PHPStan-level%208-brightgreen.svg?style=flat)](https://phpstan.org/)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
 
