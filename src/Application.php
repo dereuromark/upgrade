@@ -50,9 +50,8 @@ class Application implements ConsoleApplicationInterface
     public function console(CommandCollection $commands): CommandCollection
     {
         $commands->add('upgrade', UpgradeCommand::class);
-        $commands->add('upgrade rename', FileRenameCommand::class);
-		$commands->add('upgrade files', FileUpgradeCommand::class);
-		$commands->add('upgrade rector', RectorCommand::class);
+        $commands->add('upgrade files', FileUpgradeCommand::class);
+        $commands->add('upgrade rector', RectorCommand::class);
 
         return $commands;
     }

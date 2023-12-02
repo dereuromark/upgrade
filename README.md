@@ -81,5 +81,8 @@ bin/cake upgrade rector /home/mark/Sites/my-app/tests
 bin/cake upgrade rector /home/mark/Sites/my-app/config
 ```
 
+### Upgrade files
+See above `bin/cake upgrade files` docs.
+
 ### Upgrade legacy shell
 See cake4 branch.

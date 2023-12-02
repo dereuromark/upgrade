@@ -44,7 +44,7 @@ class FileUpgradeCommand extends Command {
 	 *
 	 * @var string
 	 */
-	protected $name = 'upgrade';
+	protected string $name = 'upgrade';
 
 	/**
 	 * Any levels always include previous ones.
