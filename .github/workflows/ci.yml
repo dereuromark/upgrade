@@ -3,6 +3,7 @@ name: CI
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 jobs:
   testsuite:
@@ -47,15 +48,7 @@ jobs:
 
     - name: Run PHPUnit
       run: |
-        if [[ ${{ matrix.php-version }} == '8.1' ]]; then
-          export CODECOVERAGE=1 && vendor/bin/phpunit --coverage-clover=coverage.xml
-        else
-          vendor/bin/phpunit
-        fi
-
-    - name: Submit code coverage
-      if: matrix.php-version == '8.1'
-      uses: codecov/codecov-action@v3
+        vendor/bin/phpunit
 
   cs-stan:
     name: Coding Standard & Static Analysis
