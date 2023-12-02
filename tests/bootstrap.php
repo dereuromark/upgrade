@@ -22,4 +22,4 @@ define('UPGRADED_APPS', TESTS . 'test_apps' . DS . 'upgraded' . DS);
 
 define('TEST_APP', TMP . 'test_app' . DS);
 
-Configure::write('App.namespace', 'Cake\Upgrade');
+Configure::write('App.namespace', 'Upgrade');

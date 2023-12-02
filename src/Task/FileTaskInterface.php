@@ -1,6 +1,6 @@
 <?php
 
-namespace Cake\Upgrade\Task;
+namespace Upgrade\Task;
 
 /**
  * Runs per file.

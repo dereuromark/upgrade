@@ -15,7 +15,7 @@ declare(strict_types=1);
  * @license https://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace Cake\Upgrade\Test;
+namespace Upgrade\Test;
 
 use Cake\Console\TestSuite\ConsoleIntegrationTestTrait;
 use Cake\TestSuite\TestCase as CakeTestCase;

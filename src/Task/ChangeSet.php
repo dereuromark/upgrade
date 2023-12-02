@@ -1,13 +1,13 @@
 <?php
 
-namespace Cake\Upgrade\Task;
+namespace Upgrade\Task;
 
 use Countable;
 
 class ChangeSet implements Countable {
 
 	/**
-	 * @var array<\Cake\Upgrade\Task\Change>
+	 * @var array<\Upgrade\Task\Change>
 	 */
 	protected array $changes;
 
@@ -19,14 +19,14 @@ class ChangeSet implements Countable {
 	}
 
 	/**
-	 * @return array<\Cake\Upgrade\Task\Change>
+	 * @return array<\Upgrade\Task\Change>
 	 */
 	public function getChanges(): array {
 		return $this->changes;
 	}
 
 	/**
-	 * @param \Cake\Upgrade\Task\ChangeSet $changeSet
+	 * @param \Upgrade\Task\ChangeSet $changeSet
 	 *
 	 * @return void
 	 */

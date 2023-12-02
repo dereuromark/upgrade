@@ -15,12 +15,12 @@ declare(strict_types=1);
  * @license https://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace Cake\Upgrade;
+namespace Upgrade;
 
 use Cake\Console\CommandCollection;
 use Cake\Core\ConsoleApplicationInterface;
-use Cake\Upgrade\Command\FileUpgradeCommand;
-use Cake\Upgrade\Command\UpgradeCommand;
+use Upgrade\Command\FileUpgradeCommand;
+use Upgrade\Command\UpgradeCommand;
 
 /**
  * Application setup class.

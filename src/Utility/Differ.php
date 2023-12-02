@@ -1,8 +1,9 @@
 <?php declare(strict_types = 1);
 
-namespace Cake\Upgrade\Utility;
+namespace Upgrade\Utility;
 
 use SebastianBergmann\Diff\Differ as SebastianBergmannDiffer;
+use SebastianBergmann\Diff\Output\DiffOnlyOutputBuilder;
 
 class Differ {
 
@@ -18,7 +19,7 @@ class Differ {
 	 * @return string
 	 */
 	public function coloredDiff(string $before, string $after): string {
-		$differ = new SebastianBergmannDiffer();
+		$differ = new SebastianBergmannDiffer(new DiffOnlyOutputBuilder());
 		$array = $differ->diffToArray($before, $after);
 
 		return $this->generateDiff($array, true);
@@ -31,7 +32,7 @@ class Differ {
 	 * @return string
 	 */
 	public function diff(string $before, string $after): string {
-		$differ = new SebastianBergmannDiffer(null);
+		$differ = new SebastianBergmannDiffer(new DiffOnlyOutputBuilder());
 		$array = $differ->diffToArray($before, $after);
 
 		return $this->generateDiff($array);

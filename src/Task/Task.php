@@ -1,6 +1,6 @@
 <?php
 
-namespace Cake\Upgrade\Task;
+namespace Upgrade\Task;
 
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -30,7 +30,7 @@ abstract class Task {
 	}
 
 	/**
-	 * @return \Cake\Upgrade\Task\ChangeSet
+	 * @return \Upgrade\Task\ChangeSet
 	 */
 	public function getChanges(): ChangeSet {
 		return new ChangeSet($this->changes);

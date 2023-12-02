@@ -1,9 +1,9 @@
 <?php
 
-namespace Cake\Upgrade\Test\TestCase\Task\Cake50;
+namespace Upgrade\Test\TestCase\Task\Cake50;
 
 use Cake\TestSuite\TestCase;
-use Cake\Upgrade\Task\Cake50\DatabaseTypeDriverTask;
+use Upgrade\Task\Cake50\DatabaseTypeDriverTask;
 
 class DatabaseTypeDriverTaskTest extends TestCase {
 

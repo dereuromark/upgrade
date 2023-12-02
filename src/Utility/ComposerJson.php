@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Cake\Upgrade\Utility;
+namespace Upgrade\Utility;
 
 use RuntimeException;
 

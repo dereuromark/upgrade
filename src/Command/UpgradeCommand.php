@@ -15,7 +15,7 @@ declare(strict_types=1);
  * @license https://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace Cake\Upgrade\Command;
+namespace Upgrade\Command;
 
 use Cake\Console\Arguments;
 use Cake\Console\BaseCommand;

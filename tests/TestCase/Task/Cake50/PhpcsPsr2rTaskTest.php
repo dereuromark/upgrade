@@ -1,9 +1,9 @@
 <?php
 
-namespace Cake\Upgrade\Test\TestCase\Task\Cake50;
+namespace Upgrade\Test\TestCase\Task\Cake50;
 
 use Cake\TestSuite\TestCase;
-use Cake\Upgrade\Task\Cake50\PhpcsPsr2rTask;
+use Upgrade\Task\Cake50\PhpcsPsr2rTask;
 
 class PhpcsPsr2rTaskTest extends TestCase {
 

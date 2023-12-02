@@ -1,6 +1,6 @@
 <?php
 
-namespace Cake\Upgrade\Task;
+namespace Upgrade\Task;
 
 interface TaskInterface {
 
@@ -17,7 +17,7 @@ interface TaskInterface {
 	public function hasChanges(): bool;
 
 	/**
-	 * @return \Cake\Upgrade\Task\ChangeSet
+	 * @return \Upgrade\Task\ChangeSet
 	 */
 	public function getChanges(): ChangeSet;
 

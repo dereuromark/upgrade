@@ -1,9 +1,9 @@
 <?php
 
-namespace Cake\Upgrade\Test\TestCase\Task\Cake50;
+namespace Upgrade\Test\TestCase\Task\Cake50;
 
 use Cake\TestSuite\TestCase;
-use Cake\Upgrade\Task\Cake50\TypeFactoryTask;
+use Upgrade\Task\Cake50\TypeFactoryTask;
 
 class TypeFactoryTaskTest extends TestCase {
 

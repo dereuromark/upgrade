@@ -1,6 +1,6 @@
 <?php
 
-namespace Cake\Upgrade\Command;
+namespace Upgrade\Command;
 
 use Cake\Command\Command;
 use Cake\Console\Arguments;
@@ -8,34 +8,34 @@ use Cake\Console\ConsoleIo;
 use Cake\Console\ConsoleOptionParser;
 use Cake\Console\Exception\StopException;
 use Cake\Core\Configure;
-use Cake\Upgrade\Processor\Processor;
-use Cake\Upgrade\Task\Cake50\BasicsTask;
-use Cake\Upgrade\Task\Cake50\CiTask;
-use Cake\Upgrade\Task\Cake50\ComposerPsr2rTask;
-use Cake\Upgrade\Task\Cake50\ComposerTask;
-use Cake\Upgrade\Task\Cake50\DatabaseTypeDriverTask;
-use Cake\Upgrade\Task\Cake50\LoadModelTask;
-use Cake\Upgrade\Task\Cake50\ModelHookTask;
-use Cake\Upgrade\Task\Cake50\ModelValidatorTask;
-use Cake\Upgrade\Task\Cake50\PhpunitXmlTask;
-use Cake\Upgrade\Task\Cake50\ReadmeTask;
-use Cake\Upgrade\Task\Cake50\RemoveOutdatedCodeTask;
-use Cake\Upgrade\Task\Cake50\ShellToCommandTask;
-use Cake\Upgrade\Task\Cake50\TemplatesFormHelperTask;
-use Cake\Upgrade\Task\Cake50\TestsBootstrapFixtureTask;
-use Cake\Upgrade\Task\Cake50\TestsCommandTask;
-use Cake\Upgrade\Task\Cake50\TestsControllerInstantiationTask;
-use Cake\Upgrade\Task\Cake50\TestsFixtureSchemaTask;
-use Cake\Upgrade\Task\Cake50\TypedClosureTask;
-use Cake\Upgrade\Task\Cake50\TypedPropertyEntityTask;
-use Cake\Upgrade\Task\Cake50\TypedPropertyFixtureTask;
-use Cake\Upgrade\Task\Cake50\TypedPropertyPluginTask;
-use Cake\Upgrade\Task\Cake50\TypedPropertyTask;
-use Cake\Upgrade\Task\Cake50\TypedPropertyTestCaseTask;
-use Cake\Upgrade\Task\Cake50\TypeFactoryTask;
-use Cake\Upgrade\Task\ChangeSet;
 use DirectoryIterator;
 use InvalidArgumentException;
+use Upgrade\Processor\Processor;
+use Upgrade\Task\Cake50\BasicsTask;
+use Upgrade\Task\Cake50\CiTask;
+use Upgrade\Task\Cake50\ComposerPsr2rTask;
+use Upgrade\Task\Cake50\ComposerTask;
+use Upgrade\Task\Cake50\DatabaseTypeDriverTask;
+use Upgrade\Task\Cake50\LoadModelTask;
+use Upgrade\Task\Cake50\ModelHookTask;
+use Upgrade\Task\Cake50\ModelValidatorTask;
+use Upgrade\Task\Cake50\PhpunitXmlTask;
+use Upgrade\Task\Cake50\ReadmeTask;
+use Upgrade\Task\Cake50\RemoveOutdatedCodeTask;
+use Upgrade\Task\Cake50\ShellToCommandTask;
+use Upgrade\Task\Cake50\TemplatesFormHelperTask;
+use Upgrade\Task\Cake50\TestsBootstrapFixtureTask;
+use Upgrade\Task\Cake50\TestsCommandTask;
+use Upgrade\Task\Cake50\TestsControllerInstantiationTask;
+use Upgrade\Task\Cake50\TestsFixtureSchemaTask;
+use Upgrade\Task\Cake50\TypedClosureTask;
+use Upgrade\Task\Cake50\TypedPropertyEntityTask;
+use Upgrade\Task\Cake50\TypedPropertyFixtureTask;
+use Upgrade\Task\Cake50\TypedPropertyPluginTask;
+use Upgrade\Task\Cake50\TypedPropertyTask;
+use Upgrade\Task\Cake50\TypedPropertyTestCaseTask;
+use Upgrade\Task\Cake50\TypeFactoryTask;
+use Upgrade\Task\ChangeSet;
 
 class FileUpgradeCommand extends Command {
 
@@ -173,7 +173,7 @@ class FileUpgradeCommand extends Command {
 	 * @param string $level
 	 * @param array<string, mixed> $config
 	 *
-	 * @return \Cake\Upgrade\Processor\Processor
+	 * @return \Upgrade\Processor\Processor
 	 */
 	protected function taskProcessor(string $level, array $config): Processor {
 		$tasks = $this->tasks();
@@ -211,7 +211,7 @@ class FileUpgradeCommand extends Command {
 	}
 
 	/**
-	 * @return array<class-string<\Cake\Upgrade\Task\TaskInterface>>
+	 * @return array<class-string<\Upgrade\Task\TaskInterface>>
 	 */
 	protected function tasks(): array {
 		//TODO: make more flexible

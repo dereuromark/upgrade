@@ -4,7 +4,7 @@
 require dirname(__DIR__) . '/config/requirements.php';
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-use Cake\Upgrade\Application;
+use Upgrade\Application;
 use Cake\Console\CommandRunner;
 
 // Build the runner with an application and root executable name.

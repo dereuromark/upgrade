@@ -1,9 +1,9 @@
 <?php
 
-namespace Cake\Upgrade\Test\TestCase\Task\Cake50;
+namespace Upgrade\Test\TestCase\Task\Cake50;
 
 use Cake\TestSuite\TestCase;
-use Cake\Upgrade\Task\Cake50\TypedPropertyTask;
+use Upgrade\Task\Cake50\TypedPropertyTask;
 
 class TypedPropertyTaskTest extends TestCase {
 

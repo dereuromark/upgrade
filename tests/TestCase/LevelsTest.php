@@ -1,9 +1,9 @@
 <?php
 
-namespace Cake\Upgrade\Test\TestCase;
+namespace Upgrade\Test\TestCase;
 
-use Cake\Filesystem\Folder;
 use Cake\TestSuite\TestCase;
+use Upgrade\Filesystem\Folder;
 
 class LevelsTest extends TestCase {
 

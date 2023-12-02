@@ -13,7 +13,7 @@ return [
  * - dir - Name of app directory.
  */
 	'App' => [
-		'namespace' => 'Cake\Upgrade',
+		'namespace' => 'Upgrade',
 		'encoding' => 'UTF-8',
 		'base' => false,
 		'dir' => 'src',

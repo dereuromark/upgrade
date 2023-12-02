@@ -1,14 +1,14 @@
 <?php
 
-namespace Cake\Upgrade\Processor;
+namespace Upgrade\Processor;
 
-use Cake\Upgrade\Task\ChangeSet;
-use Cake\Upgrade\Task\FileTaskInterface;
+use Upgrade\Task\ChangeSet;
+use Upgrade\Task\FileTaskInterface;
 
 class Processor {
 
 	/**
-	 * @var array<class-string<\Cake\Upgrade\Task\TaskInterface>>
+	 * @var array<class-string<\Upgrade\Task\TaskInterface>>
 	 */
 	protected array $tasks;
 
@@ -18,7 +18,7 @@ class Processor {
 	protected array $config;
 
 	/**
-	 * @param array<class-string<\Cake\Upgrade\Task\TaskInterface>> $tasks
+	 * @param array<class-string<\Upgrade\Task\TaskInterface>> $tasks
 	 * @param array<string, mixed> $config
 	 */
 	public function __construct(array $tasks, array $config) {
@@ -29,7 +29,7 @@ class Processor {
 	/**
 	 * @param string $path
 	 *
-	 * @return \Cake\Upgrade\Task\ChangeSet
+	 * @return \Upgrade\Task\ChangeSet
 	 */
 	public function process(string $path): ChangeSet {
 		$changeSet = new ChangeSet();

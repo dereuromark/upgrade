@@ -1,8 +1,8 @@
 <?php
 
-namespace Cake\Upgrade\Task;
+namespace Upgrade\Task;
 
-use Cake\Upgrade\Utility\Differ;
+use Upgrade\Utility\Differ;
 
 class Change {
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Cake\Upgrade\Task\Cake50;
+namespace Upgrade\Task\Cake50;
 
-use Cake\Upgrade\Task\RepoTaskInterface;
-use Cake\Upgrade\Task\Task;
+use Upgrade\Task\RepoTaskInterface;
+use Upgrade\Task\Task;
 
 /**
  * Adjusts:

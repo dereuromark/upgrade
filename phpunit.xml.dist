@@ -6,7 +6,7 @@
 
 	<testsuites>
 		<testsuite name="upgrade">
-			<directory>tests/</directory>
+			<directory>tests/TestCase/</directory>
 		</testsuite>
 	</testsuites>
 </phpunit>
