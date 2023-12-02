@@ -53,6 +53,9 @@ class UpgradeCommand extends BaseCommand {
 		if ($path === false) {
 			$io->abort('Path cannot be read. Maybe a typo?');
 		}
+		$path .= DS;
+
+		$io->out('Working path: ' . $path);
 
 		$io->out('Upgrading skeleton. You can diff and revert anything that needs to stay after the operation!');
 		$continue = $io->askChoice('Make sure you commited/backup up your files. Continue?', ['y', 'n'], 'n');
@@ -157,7 +160,7 @@ class UpgradeCommand extends BaseCommand {
 	 * @param string|null $targetFile
 	 * @return bool
 	 */
-	protected function _addFile($file, $sourcePath, $targetPath, $targetFile = null) {
+	protected function _addFile(string $file, string $sourcePath, string $targetPath, ?string $targetFile = null): bool {
 		$result = false;
 
 		if (!file_exists($sourcePath . $file)) {
@@ -169,7 +172,7 @@ class UpgradeCommand extends BaseCommand {
 		$fileExists = file_exists($targetPath . $file);
 		if (!$fileExists || $this->args->getOption('overwrite')) {
 			$result = true;
-			if (empty($this->params['dry-run'])) {
+			if (!$this->args->getOption('dry-run')) {
 				if ($targetFile === null) {
 					$targetFile = $file;
 				}
