@@ -12,6 +12,7 @@ use Cake\Console\ConsoleOptionParser;
 use Cake\Core\Configure;
 use Cake\Error\FatalErrorException;
 use DirectoryIterator;
+use Exception;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RecursiveRegexIterator;
@@ -123,19 +124,24 @@ class FileRenameCommand extends BaseCommand
 
         foreach ((array)Configure::read('App.paths.plugins') as $path) {
             $this->io->out("Renaming templates in <info>{$path}</info>");
-            $iterator = new DirectoryIterator($path);
-            foreach ($iterator as $dirInfo) {
-                $dirPath = $dirInfo->getRealPath();
-                if ($dirInfo->isDot() || !is_dir($dirPath . '/src/Template')) {
-                    continue;
-                }
 
-                $this->rename(
-                    $dirPath . '/src/Template',
-                    $dirPath . '/templates',
-                );
-                $this->renameSubFolders($dirPath . '/templates');
-                $this->changeExt($dirPath . '/templates');
+            try {
+                $iterator = new DirectoryIterator($path);
+                foreach ($iterator as $dirInfo) {
+                    $dirPath = $dirInfo->getRealPath();
+                    if ($dirInfo->isDot() || !is_dir($dirPath . '/src/Template')) {
+                        continue;
+                    }
+
+                    $this->rename(
+                        $dirPath . '/src/Template',
+                        $dirPath . '/templates',
+                    );
+                    $this->renameSubFolders($dirPath . '/templates');
+                    $this->changeExt($dirPath . '/templates');
+                }
+            } catch (Exception $e) {
+                continue;
             }
         }
     }
@@ -156,6 +162,10 @@ class FileRenameCommand extends BaseCommand
         }
 
         foreach ((array)Configure::read('App.paths.plugins') as $path) {
+            if (!is_dir($path)) {
+                continue;
+            }
+
             $this->io->out("Renaming locales in <info>{$path}</info>");
             $iterator = new DirectoryIterator($path);
             foreach ($iterator as $dirInfo) {
@@ -201,11 +211,15 @@ class FileRenameCommand extends BaseCommand
                 RecursiveRegexIterator::SPLIT,
             );
 
-            foreach ($templateDirs as $val) {
-                $this->renameWithCasing(
-                    $val[0] . '/' . $folder,
-                    $val[0] . '/' . strtolower($folder),
-                );
+            try {
+                foreach ($templateDirs as $val) {
+                    $this->renameWithCasing(
+                        $val[0] . '/' . $folder,
+                        $val[0] . '/' . strtolower($folder),
+                    );
+                }
+            } catch (Exception $e) {
+                continue;
             }
         }
     }

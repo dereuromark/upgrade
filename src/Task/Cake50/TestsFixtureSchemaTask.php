@@ -25,7 +25,7 @@ class TestsFixtureSchemaTask extends Task implements RepoTaskInterface
     public function run(string $path): void
     {
         $filePath = $path . static::FILE_SCHEMA;
-        if ($this->config['plugin'] || file_exists($filePath)) {
+        if (!empty($this->config['plugin']) || file_exists($filePath)) {
             return;
         }
 
